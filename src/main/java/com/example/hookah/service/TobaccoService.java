@@ -98,6 +98,13 @@ public class TobaccoService {
                 .build();
     }
 
+    public List<TobaccoDto> getByBrandAndFlavor(String brand, String flavor) {
+        return tobaccoRepository.findByBrandIgnoreCaseAndFlavorsContainingIgnoreCase(brand, flavor)
+                .stream()
+                .map(this::toDto)
+                .collect(Collectors.toList());
+    }
+
     public List<TobaccoDto> getByBrand(String brand) {
         return tobaccoRepository.findByBrandIgnoreCase(brand)
                 .stream()
@@ -111,13 +118,4 @@ public class TobaccoService {
                 .map(this::toDto)
                 .collect(Collectors.toList());
     }
-
-    public List<TobaccoDto> getByBrandAndFlavor(String brand, String flavor) {
-        return tobaccoRepository.findByBrandIgnoreCaseAndFlavorsContainingIgnoreCase(brand, flavor)
-                .stream()
-                .map(this::toDto)
-                .collect(Collectors.toList());
-    }
-
 }
-
